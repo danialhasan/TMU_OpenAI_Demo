@@ -6,12 +6,12 @@
         <Conversation :user="message.user" :msg="message.content" />
       </div>
     </div>
-    <div id="input_box" class="flex absolute bottom-24">
+    <div id="input_box" class="flex sticky ">
       <textarea
         name=""
         id=""
         cols="40"
-        class="rounded-md text-gray-900 max-h-[200px]"
+        class="rounded-md text-gray-900 min-h-[50px] max-h-[200px]"
         v-model="prompt"
       ></textarea>
       <button class="ml-3" @click="handleMessageSubmit">
@@ -32,7 +32,7 @@ export default {
     return {
       prompt: '',
       messages: [],
-      openai_secret_key: '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',
+      openai_secret_key: '',
     };
   },
   methods: {
