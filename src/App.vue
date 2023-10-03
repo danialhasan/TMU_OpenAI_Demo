@@ -1,28 +1,24 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="https://vuejs.org/images/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="">
+    <header class="text-6xl font-bold text-center py-16">OpenAI Demo</header>
+    <div
+      id="conversation_container"
+      class="border border-red-500 flex flex-col justify-items-center"
+    >
+      <Conversation user />
+      <Conversation />
+      <Conversation user />
+      <Conversation />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Conversation from './components/Conversation.vue';
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { Conversation },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
