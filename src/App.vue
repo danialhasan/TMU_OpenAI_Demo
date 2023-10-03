@@ -32,7 +32,8 @@ export default {
     return {
       prompt: '',
       messages: [],
-      openai_secret_key: '',
+      // DON'T PUSH THIS KEY, OTHERWISE OPENAI WILL DETECT AND DEACTIVATE
+      openai_secret_key: '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',
     };
   },
   methods: {
