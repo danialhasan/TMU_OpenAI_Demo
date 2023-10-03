@@ -3,7 +3,7 @@
     <header class="text-6xl font-bold text-center py-16">OpenAI Demo</header>
     <div id="conversation_container" class="flex flex-col justify-center">
       <div v-for="message in messages">
-        <Conversation :user="message.user" :msg="message.contents" />
+        <Conversation :user="message.user" :msg="message.content" />
       </div>
     </div>
     <div id="input_box" class="flex absolute bottom-24">
@@ -11,7 +11,7 @@
         name=""
         id=""
         cols="40"
-        class="rounded-md text-gray-900"
+        class="rounded-md text-gray-900 max-h-[200px]"
         v-model="prompt"
       ></textarea>
       <button class="ml-3" @click="handleMessageSubmit">
@@ -31,18 +31,8 @@ export default {
   data() {
     return {
       prompt: '',
-      messages: [
-        {
-          user: true,
-          contents: 'Hi! How are you today?',
-        },
-        {
-          user: false,
-          contents:
-            "I'm just a computer program, so I don't have feelings, but I'm here to help you with any questions or tasks you have. How can I assist you today?",
-        },
-      ],
-      openai_secret_key: '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',
+      messages: [],
+      openai_secret_key: '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',
     };
   },
   methods: {
@@ -53,9 +43,10 @@ export default {
        */
       this.messages.push({
         user: true,
-        contents: this.prompt,
+        content: this.prompt,
       });
       this.submitOpenAiRequest(this.prompt);
+      this.prompt = '';
     },
     async submitOpenAiRequest(prompt) {
       const endpoint = 'https://api.openai.com/v1/chat/completions';
@@ -78,7 +69,14 @@ export default {
           'Content-Type': 'application/json',
         },
       });
-      console.log('RESPONSE: ', response);
+      if (response) {
+        console.log(response.data.choices[0].message.content);
+        this.messages.push({
+          user: false,
+          content: response.data.choices[0].message.content,
+        });
+      }
+      return response;
     },
   },
   mounted() {},
