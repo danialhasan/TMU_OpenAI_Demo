@@ -6,7 +6,7 @@
         <Conversation :user="message.user" :msg="message.content" />
       </div>
     </div>
-    <div id="input_box" class="flex sticky">
+    <div id="input_box" class="flex sticky ">
       <textarea
         name=""
         id=""
@@ -32,33 +32,33 @@ export default {
     return {
       prompt: '',
       messages: [],
-      openai_secret_key: '# PUT API KEY HERE',
+      openai_secret_key: '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',
     };
   },
   methods: {
     async handleMessageSubmit() {
       /**
        * Get prompt, store in messages as user message. Then,
-       * submit openAI request and clear the input field.
+       * submit openAI request and clear the input field. 
        */
       this.messages.push({
         user: true,
         content: this.prompt,
       });
-      try {
-        this.submitOpenAiRequest(this.prompt);
+      try{
+      this.submitOpenAiRequest(this.prompt);
       } catch (error) {
-        console.error('SOMETHING BROKE: ', error);
+        console.error('SOMETHING BROKE: ', error)
       }
       this.prompt = '';
     },
     async submitOpenAiRequest(prompt) {
       /**
-       * Send a request to OpenAI with our prompt.
+       * Send a request to OpenAI with our prompt. 
        */
-      const endpoint = '# PUT ENDPOINT HERE';
+      const endpoint = 'https://api.openai.com/v1/chat/completions';
       const request = {
-        model: '# PUT OPENAI MODEL HERE',
+        model: 'gpt-3.5-turbo',
         messages: [
           {
             role: 'system',
@@ -66,14 +66,14 @@ export default {
           },
           {
             role: 'user',
-            content: '# PUT PROMPT HERE',
+            content: prompt,
           },
         ],
       };
       const response = await axios.post(endpoint, request, {
         headers: {
-          // API token goes here!
-          Authorization: `Bearer # PUT API TOKEN HERE`,
+					// API token goes here!
+          Authorization: `Bearer ${this.openai_secret_key}`,
           'Content-Type': 'application/json',
         },
       });

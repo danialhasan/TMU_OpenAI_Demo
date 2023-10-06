@@ -6,7 +6,7 @@
         <Conversation :user="message.user" :msg="message.content" />
       </div>
     </div>
-    <div id="input_box" class="flex sticky">
+    <div id="input_box" class="flex sticky ">
       <textarea
         name=""
         id=""
@@ -39,22 +39,22 @@ export default {
     async handleMessageSubmit() {
       /**
        * Get prompt, store in messages as user message. Then,
-       * submit openAI request and clear the input field.
+       * submit openAI request and clear the input field. 
        */
       this.messages.push({
         user: true,
         content: this.prompt,
       });
-      try {
-        this.submitOpenAiRequest(this.prompt);
+      try{
+      this.submitOpenAiRequest(this.prompt);
       } catch (error) {
-        console.error('SOMETHING BROKE: ', error);
+        console.error('SOMETHING BROKE: ', error)
       }
       this.prompt = '';
     },
     async submitOpenAiRequest(prompt) {
       /**
-       * Send a request to OpenAI with our prompt.
+       * Send a request to OpenAI with our prompt. 
        */
       const endpoint = '# PUT ENDPOINT HERE';
       const request = {
@@ -72,7 +72,7 @@ export default {
       };
       const response = await axios.post(endpoint, request, {
         headers: {
-          // API token goes here!
+					// API token goes here!
           Authorization: `Bearer # PUT API TOKEN HERE`,
           'Content-Type': 'application/json',
         },
